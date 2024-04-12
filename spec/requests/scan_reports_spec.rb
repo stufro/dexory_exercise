@@ -21,5 +21,10 @@ RSpec.describe 'scan_reports' do
       subject
       expect(ScanReport.first.results.first).to have_attributes(scan_result)
     end
+
+    it 'returns a success response body' do
+      subject
+      expect(response.body).to eq({ results_imported: 1 }.to_json)
+    end
   end
 end

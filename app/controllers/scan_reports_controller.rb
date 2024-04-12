@@ -1,7 +1,7 @@
 class ScanReportsController < ApplicationController
   def create
     report = ScanReport.create
-    report.results.create!(JSON.parse(request.body.read))
-    render json: '{}'
+    results = report.results.create!(JSON.parse(request.body.read))
+    render json: { results_imported: results.count }
   end
 end
