@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   root 'comparison_reports#index'
 
   resources :scan_reports, only: %i[create]
-  resources :comparison_reports, only: %i[index]
+  resources :comparison_reports, only: %i[index new create]
 end

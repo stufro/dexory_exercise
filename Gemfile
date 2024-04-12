@@ -52,6 +52,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rails'

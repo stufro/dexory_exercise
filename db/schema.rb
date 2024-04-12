@@ -16,8 +16,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_174941) do
 
   create_table "comparison_reports", force: :cascade do |t|
     t.string "created_by"
+    t.bigint "scan_report_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["scan_report_id"], name: "index_comparison_reports_on_scan_report_id"
   end
 
   create_table "scan_reports", force: :cascade do |t|
