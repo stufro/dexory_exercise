@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'scan_reports' do
@@ -10,7 +12,7 @@ RSpec.describe 'scan_reports' do
 
     it 'returns a 200' do
       subject
-      expect(response.code).to eq '200'
+      expect(response).to have_http_status :ok
     end
 
     it 'creates a scan report' do
@@ -32,7 +34,7 @@ RSpec.describe 'scan_reports' do
 
       it 'returns a 400' do
         subject
-        expect(response.code).to eq '400'
+        expect(response).to have_http_status :bad_request
       end
 
       it 'returns an error response body' do

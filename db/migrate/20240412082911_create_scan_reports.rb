@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 class CreateScanReports < ActiveRecord::Migration[7.1]
   def change
-    create_table :scan_reports do |t|
-      t.timestamps
-    end
+    create_table :scan_reports, &:timestamps
   end
 end

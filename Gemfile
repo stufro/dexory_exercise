@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.3.0'
@@ -49,6 +51,8 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'debug', platforms: %i[mri windows]
   gem 'rspec-rails'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :development do

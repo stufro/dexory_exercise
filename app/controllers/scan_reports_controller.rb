@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScanReportsController < ApplicationController
   def create
     report = ScanReport.create

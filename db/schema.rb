@@ -21,8 +21,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_091906) do
 
   create_table "scan_results", force: :cascade do |t|
     t.string "name"
-    t.boolean "scanned"
-    t.boolean "occupied"
+    t.boolean "scanned", default: false, null: false
+    t.boolean "occupied", default: false, null: false
     t.string "detected_barcodes", array: true
     t.bigint "scan_report_id"
     t.datetime "created_at", null: false
