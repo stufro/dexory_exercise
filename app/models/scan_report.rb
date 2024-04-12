@@ -1,0 +1,2 @@
+class ScanReport < ApplicationRecord
+end
