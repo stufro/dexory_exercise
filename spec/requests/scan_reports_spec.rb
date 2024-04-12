@@ -26,5 +26,19 @@ RSpec.describe 'scan_reports' do
       subject
       expect(response.body).to eq({ results_imported: 1 }.to_json)
     end
+
+    context 'when given invalid JSON' do
+      subject { post '/scan_reports', params: '{foo', headers: { 'Content-Type' => 'application/json' } }
+
+      it 'returns a 400' do
+        subject
+        expect(response.code).to eq '400'
+      end
+
+      it 'returns an error response body' do
+        subject
+        expect(response.body).to eq '{"error":"unexpected token at \'{foo\'"}'
+      end
+    end
   end
 end
