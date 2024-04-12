@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  root 'comparison_reports#index'
+
   resources :scan_reports, only: %i[create]
+  resources :comparison_reports, only: %i[index]
 end
