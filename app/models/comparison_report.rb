@@ -1,0 +1,2 @@
+class ComparisonReport < ApplicationRecord
+end
