@@ -9,7 +9,7 @@ class ComparisonReport < ApplicationRecord
         name: record['LOCATION'],
         expected_barcodes: [record['ITEM']],
         detected_barcodes: related_scan.detected_barcodes,
-        discrepencies: [],
+        discrepencies: identify_discrepencies(related_scan.detected_barcodes, [record['ITEM']]),
         report: self
       )
     end
@@ -21,5 +21,9 @@ class ComparisonReport < ApplicationRecord
 
   def scan_result(location_name)
     scan_report.results.find_by(name: location_name)
+  end
+
+  def identify_discrepencies(detected, expected)
+    detected - expected
   end
 end
