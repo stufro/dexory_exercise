@@ -5,12 +5,18 @@ class ComparisonReport < ApplicationRecord
   has_many :results, class_name: 'ComparisonResult', dependent: :destroy
 
   def generate(comparison_records)
+    return unless scan_report
+
     comparison_records.each do |record|
       related_scan = scan_result(record['LOCATION'])
       results.build(comparison_result_attributes(record, related_scan))
     end
 
     save
+  end
+
+  def discrepencies
+    results.where('cardinality(discrepencies) > 0')
   end
 
   private
@@ -23,13 +29,15 @@ class ComparisonReport < ApplicationRecord
     {
       name: comparison_record['LOCATION'],
       expected_barcodes: [comparison_record['ITEM']],
-      detected_barcodes: related_scan.detected_barcodes,
-      discrepencies: discrepencies_xor(related_scan.detected_barcodes, [comparison_record['ITEM']]),
+      detected_barcodes: related_scan&.detected_barcodes,
+      discrepencies: discrepencies_xor(related_scan&.detected_barcodes, [comparison_record['ITEM']]),
       report: self
     }
   end
 
   def discrepencies_xor(detected, expected)
+    return [] if detected.nil?
+
     xor = (detected - expected) + (expected - detected)
     xor.compact_blank
   end

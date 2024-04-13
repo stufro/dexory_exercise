@@ -14,25 +14,26 @@ RSpec.describe 'Comparison Reports' do
   end
 
   describe 'creating a comparison report' do
-    let!(:scan_result1) do
-      FactoryBot.create :scan_result, name: 'ZA001A', detected_barcodes: 'ABC1', report: scan_report
+    let!(:scan_result) do
+      FactoryBot.create :scan_result, name: 'ZA001A', detected_barcodes: ['ABC1'], report: scan_report
     end
-    let!(:scan_result2) do
-      FactoryBot.create :scan_result, name: 'ZA002A', detected_barcodes: 'ABC9', report: scan_report
+    let!(:scan_result_incorrect_barcode) do
+      FactoryBot.create :scan_result, name: 'ZA002A', detected_barcodes: ['ABC9'], report: scan_report
     end
-    let!(:scan_result3) do
-      FactoryBot.create :scan_result, name: 'ZA002A', detected_barcodes: 'ABC3', report: scan_report
+    let!(:scan_result_unexpected_barcode) do
+      FactoryBot.create :scan_result, name: 'ZA003A', detected_barcodes: ['ABC3'], report: scan_report
     end
 
     it 'creates a comparison report' do
       visit '/'
       click_on 'New Comparison'
       choose(scan_report.created_at.to_s)
+      attach_file('comparison_report[comparison_file]', Rails.root.join('spec/fixtures/comparison_input.csv'))
       click_on 'Generate'
 
       within('#discrepency-table') do
-        expect(page).to have_content scan_result2.name
-        expect(page).to have_content scan_result3.name
+        expect(page).to have_content scan_result_incorrect_barcode.name
+        expect(page).to have_content scan_result_unexpected_barcode.name
       end
     end
   end

@@ -24,9 +24,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_141000) do
 
   create_table "comparison_results", force: :cascade do |t|
     t.string "name"
-    t.string "expected_barcodes", array: true
-    t.string "detected_barcodes", array: true
-    t.string "discrepencies", array: true
+    t.string "expected_barcodes", default: [], array: true
+    t.string "detected_barcodes", default: [], array: true
+    t.string "discrepencies", default: [], array: true
     t.bigint "comparison_report_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

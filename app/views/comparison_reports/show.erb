@@ -1,0 +1,22 @@
+<table id="discrepency-table">
+  <thead>
+    <tr>
+      <th>Location Name</th>
+      <th>Expected Barcodes</th>
+      <th>Detected Barcodes</th>
+      <th>Discrepencies</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @report.discrepencies.each do |comparison_result| %>
+      <tr>
+        <td><%= comparison_result.name %></td>
+        <td><%= comparison_result.expected_barcodes.join %></td>
+        <td><%= comparison_result.detected_barcodes.join %></td>
+        <td><%= comparison_result.discrepencies.join %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>

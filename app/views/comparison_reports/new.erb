@@ -1,4 +1,5 @@
 <%= form_with model: @report, data: { turbo: false } do |form| %>
   <%= form.collection_radio_buttons :scan_report_id, ScanReport.order(created_at: :desc), :id, :created_at %>
+  <%= form.file_field :comparison_file %>
   <%= form.submit "Generate" %>
 <% end %>

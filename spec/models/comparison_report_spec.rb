@@ -55,5 +55,23 @@ RSpec.describe ComparisonReport do
         )
       end
     end
+
+    context 'when there is no scan_report' do
+      subject { described_class.new(scan_report: nil) }
+
+      it 'returns falsey' do
+        expect(subject.generate(comparison_data)).to be_falsey
+      end
+    end
+  end
+
+  describe '#discrepencies' do
+    it 'returns comparison results with more than 0 discrepencies' do
+      subject = described_class.create(scan_report:)
+      discrepent_result = ComparisonResult.create(report: subject, discrepencies: ['Foo'])
+      ComparisonResult.create(report: subject, discrepencies: [])
+
+      expect(subject.discrepencies).to eq [discrepent_result]
+    end
   end
 end
