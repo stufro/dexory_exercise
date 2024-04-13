@@ -12,8 +12,14 @@ RSpec.describe 'Comparison Reports' do
   end
 
   describe 'creating a comparison report' do
-    before do
-      FactoryBot.create_list :scan_result, 3, report: scan_report
+    let!(:scan_result1) do
+      FactoryBot.create :scan_result, name: 'ZA001A', detected_barcodes: 'ABC1', report: scan_report
+    end
+    let!(:scan_result2) do
+      FactoryBot.create :scan_result, name: 'ZA002A', detected_barcodes: 'ABC9', report: scan_report
+    end
+    let!(:scan_result3) do
+      FactoryBot.create :scan_result, name: 'ZA002A', detected_barcodes: 'ABC3', report: scan_report
     end
 
     it 'creates a comparison report' do
@@ -22,8 +28,10 @@ RSpec.describe 'Comparison Reports' do
       choose(scan_report.created_at.to_s)
       click_on 'Generate'
 
-      expect(ComparisonReport.count).to eq 1
-      expect(ComparisonReport.first.scan_report.id).to eq scan_report.id
+      within('#discrepency-table') do
+        expect(page).to have_content scan_result2.name
+        expect(page).to have_content scan_result3.name
+      end
     end
   end
 end

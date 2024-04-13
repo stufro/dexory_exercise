@@ -9,7 +9,7 @@ class ComparisonReportsController < ApplicationController
 
   def create
     @report = ComparisonReport.new(comparison_report_params)
-    if @report.save
+    if @report.generate
       redirect_to comparison_reports_path
     else
       render :new
