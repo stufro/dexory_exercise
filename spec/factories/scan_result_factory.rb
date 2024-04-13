@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :scan_result do
     sequence(:name) { |n| "ZA00#{n}A" }

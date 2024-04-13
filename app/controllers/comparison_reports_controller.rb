@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ComparisonReportsController < ApplicationController
   def index
     @reports = ComparisonReport.all

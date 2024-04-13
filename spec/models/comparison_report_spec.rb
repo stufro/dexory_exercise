@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ComparisonReport do
@@ -7,9 +9,10 @@ RSpec.describe ComparisonReport do
   let(:comparison_data) do
     [{ 'LOCATION' => 'ZA001A', 'ITEM' => 'ABC1' }]
   end
+  let(:detected_barcodes) { ['ABC1'] }
 
   before do
-    FactoryBot.create :scan_result, name: 'ZA001A', detected_barcodes: ['ABC1'], report: scan_report
+    FactoryBot.create :scan_result, name: 'ZA001A', detected_barcodes:, report: scan_report
   end
 
   describe '#generate' do
@@ -26,10 +29,24 @@ RSpec.describe ComparisonReport do
       expect(subject.generate(comparison_data)).to be true
     end
 
-    context 'when there is a discrepency' do
+    context 'when there is an unexpected barcode detected' do
       let(:comparison_data) do
         [{ 'LOCATION' => 'ZA001A', 'ITEM' => '' }]
       end
+
+      it 'includes the barcode in the discrepencies field' do
+        subject.generate(comparison_data)
+        expect(ComparisonResult.find_by!(name: 'ZA001A').discrepencies).to match_array(
+          ['ABC1']
+        )
+      end
+    end
+
+    context 'when an expected barcode is missing' do
+      let(:comparison_data) do
+        [{ 'LOCATION' => 'ZA001A', 'ITEM' => 'ABC1' }]
+      end
+      let(:detected_barcodes) { [] }
 
       it 'includes the barcode in the discrepencies field' do
         subject.generate(comparison_data)
