@@ -1,5 +1,19 @@
-<%= form_with model: @report, data: { turbo: false } do |form| %>
-  <%= form.collection_radio_buttons :scan_report_id, ScanReport.order(created_at: :desc), :id, :created_at %>
-  <%= form.file_field :comparison_file %>
-  <%= form.submit "Generate" %>
-<% end %>
+<div class="container">
+<div class="container flex items-baseline justify-between w-100">
+  <h1 class="text-4xl">New Comparison</h1>
+  <%= link_to 'Back', comparison_reports_path, class: "btn" %>
+</div>
+
+  <%= form_with model: @report, data: { turbo: false }, class: "form-control" do |form| %>
+    <%= form.label :scan_report_id, "Select a scan report to compare", class: "label-text" %>
+
+    <div class="container flex mb-4">
+      <%= form.collection_radio_buttons :scan_report_id, ScanReport.order(created_at: :desc), :id, :created_at, {}, {class: "radio radio-primary mr-2" }%>
+    </div>
+
+    <%= form.label :comparison_file, "Upload a file to compare the scan to", class: "label-text" %>
+    <%= form.file_field :comparison_file, class: "mb-4" %>
+
+    <%= form.submit "Generate", class: "btn btn-primary" %>
+  <% end %>
+</div>

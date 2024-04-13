@@ -1,19 +1,23 @@
-<h1>Comparison Reports</h1>
-<%= link_to 'New Comparison', new_comparison_report_path %>
+<div class="container flex items-baseline justify-between w-100">
+  <h1 class="text-4xl">Comparison Reports</h1>
+  <%= link_to 'New Comparison', new_comparison_report_path, class: "btn" %>
+</div>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Created By</th>
       <th>Created At</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @reports.each do |report| %>
       <tr>
-        <td><%= report.created_by %></td>
+        <td>Alice Bob</td>
         <td><%= report.created_at %></td>
+        <td><%= link_to "👀", report, class: "btn btn-sm btn-primary" %>
       </tr>
     <% end %>
   </tbody>

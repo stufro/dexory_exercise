@@ -1,4 +1,10 @@
-<table id="discrepency-table">
+<div class="container flex items-baseline justify-between w-100">
+  <h1 class="text-4xl">Comparison Report#<%=@report.id%></h1>
+  <%= link_to 'Back', comparison_reports_path, class: "btn" %>
+</div>
+
+<h2 class="text-2xl">Discrepencies</h1>
+<table class="table" id="discrepency-table">
   <thead>
     <tr>
       <th>Location Name</th>
