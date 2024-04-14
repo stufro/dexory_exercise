@@ -14,7 +14,7 @@
         <td><%= comparison_result.name %></td>
         <td><%= comparison_result.expected_barcodes.join %></td>
         <td><%= comparison_result.detected_barcodes.join %></td>
-        <td><%= t(comparison_result.status, scope: "comparison_reports.show") %></td>
+        <td class=<%= status_class %>><%= t(comparison_result.status, scope: "comparison_reports.show") %></td>
       </tr>
     <% end %>
   </tbody>

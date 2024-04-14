@@ -3,8 +3,8 @@
   <%= link_to 'Back', comparison_reports_path, class: "btn" %>
 </div>
 
-<h2 class="text-2xl">Discrepancies</h1>
-<%= render "comparison_results_table", comparison_results: @report.discrepancies, id: "discrepancy" %>
+<h2 class="text-2xl">Discrepancies (<%= @report.discrepancies.count %> records)</h1>
+<%= render "comparison_results_table", comparison_results: @report.discrepancies, id: "discrepancy", status_class: "bg-error/30" %>
 
-<h2 class="text-2xl">Other Results</h1>
-<%= render "comparison_results_table", comparison_results: @report.non_discrepancies, id: "other" %>
+<h2 class="text-2xl">Other Results (<%= @report.non_discrepancies.count %> records)</h1>
+<%= render "comparison_results_table", comparison_results: @report.non_discrepancies, id: "other", status_class: "bg-success/40" %>
