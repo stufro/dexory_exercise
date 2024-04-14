@@ -28,4 +28,10 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  comparison_reports:
+    show:
+      empty_expected: Empty as expected
+      empty_unexpected: Empty (Expected to be occupied)
+      occupied_expected: Occupied as expected
+      occupied_unexpected: Occupied (Expected to be empty)
+      occupied_incorrect: Occupied with incorrect item

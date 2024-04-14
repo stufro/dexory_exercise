@@ -6,7 +6,7 @@ class CreateComparisonResults < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :expected_barcodes, array: true, default: []
       t.string :detected_barcodes, array: true, default: []
-      t.string :discrepencies, array: true, default: []
+      t.string :discrepancies, array: true, default: []
       t.belongs_to :comparison_report
 
       t.timestamps

@@ -15,8 +15,12 @@ class ComparisonReport < ApplicationRecord
     save
   end
 
-  def discrepencies
-    results.where('cardinality(discrepencies) > 0')
+  def discrepancies
+    results.where('cardinality(discrepancies) > 0')
+  end
+
+  def non_discrepancies
+    results.where('cardinality(discrepancies) = 0')
   end
 
   private
@@ -30,12 +34,12 @@ class ComparisonReport < ApplicationRecord
       name: comparison_record['LOCATION'],
       expected_barcodes: [comparison_record['ITEM']],
       detected_barcodes: related_scan&.detected_barcodes,
-      discrepencies: discrepencies_xor(related_scan&.detected_barcodes, [comparison_record['ITEM']]),
+      discrepancies: discrepancies_xor(related_scan&.detected_barcodes, [comparison_record['ITEM']]),
       report: self
     }
   end
 
-  def discrepencies_xor(detected, expected)
+  def discrepancies_xor(detected, expected)
     return [] if detected.nil?
 
     xor = (detected - expected) + (expected - detected)

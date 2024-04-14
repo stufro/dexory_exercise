@@ -31,9 +31,21 @@ RSpec.describe 'Comparison Reports' do
       attach_file('comparison_report[comparison_file]', Rails.root.join('spec/fixtures/comparison_input.csv'))
       click_on 'Generate'
 
-      within('#discrepency-table') do
+      within('#discrepancy-table') do
         expect(page).to have_content scan_result_incorrect_barcode.name
         expect(page).to have_content scan_result_unexpected_barcode.name
+      end
+
+      within("#result-#{scan_result_incorrect_barcode.id}") do
+        expect(page).to have_content 'Occupied with incorrect item'
+      end
+
+      within("#result-#{scan_result_unexpected_barcode.id}") do
+        expect(page).to have_content 'Occupied (Expected to be empty)'
+      end
+
+      within("#result-#{scan_result.id}") do
+        expect(page).to have_content 'Occupied as expected'
       end
     end
   end

@@ -1,0 +1,21 @@
+<table class="table mb-12" id="<%= id %>-table">
+  <thead>
+    <tr>
+      <th>Location Name</th>
+      <th>Expected Barcodes</th>
+      <th>Detected Barcodes</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% comparison_results.each do |comparison_result| %>
+      <tr id="result-<%= comparison_result.id %>">
+        <td><%= comparison_result.name %></td>
+        <td><%= comparison_result.expected_barcodes.join %></td>
+        <td><%= comparison_result.detected_barcodes.join %></td>
+        <td><%= t(comparison_result.status, scope: "comparison_reports.show") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
