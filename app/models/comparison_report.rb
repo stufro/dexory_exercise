@@ -32,7 +32,7 @@ class ComparisonReport < ApplicationRecord
   def comparison_result_attributes(comparison_record, related_scan)
     {
       name: comparison_record['LOCATION'],
-      expected_barcodes: [comparison_record['ITEM']],
+      expected_barcodes: [comparison_record['ITEM']].compact,
       detected_barcodes: related_scan&.detected_barcodes,
       discrepancies: discrepancies_xor(related_scan&.detected_barcodes, [comparison_record['ITEM']]),
       report: self
