@@ -31,6 +31,6 @@ class ComparisonReportsController < ApplicationController
   end
 
   def comparison_input_data
-    comparison_data = CSV.parse(params[:comparison_report][:comparison_file].tempfile, headers: true).map(&:to_h)
+    CSV.parse(params[:comparison_report][:comparison_file].tempfile, headers: true).map(&:to_h)
   end
 end

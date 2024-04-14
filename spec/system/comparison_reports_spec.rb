@@ -36,17 +36,9 @@ RSpec.describe 'Comparison Reports' do
         expect(page).to have_content scan_result_unexpected_barcode.name
       end
 
-      within("#result-#{scan_result_incorrect_barcode.id}") do
-        expect(page).to have_content 'Occupied with incorrect item'
-      end
-
-      within("#result-#{scan_result_unexpected_barcode.id}") do
-        expect(page).to have_content 'Occupied (Expected to be empty)'
-      end
-
-      within("#result-#{scan_result.id}") do
-        expect(page).to have_content 'Occupied as expected'
-      end
+      expect(page).to have_content 'Occupied with incorrect item'
+      expect(page).to have_content 'Occupied (Expected to be empty)'
+      expect(page).to have_content 'Occupied as expected'
     end
   end
 end

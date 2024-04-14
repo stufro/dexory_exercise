@@ -1,0 +1,11 @@
+{
+  "name": "dexory_exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Stuart Frost <stuart.frosty@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "daisyui": "^4.10.1",
+    "postcss": "^8.4.38"
+  }
+}
