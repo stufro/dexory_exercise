@@ -8,7 +8,7 @@
     <%= form.label :scan_report_id, "Select a scan report to compare", class: "label-text" %>
 
     <div class="container flex mb-4">
-      <%= form.collection_radio_buttons :scan_report_id, ScanReport.order(created_at: :desc), :id, :created_at, {}, {class: "radio radio-primary mr-2" }%>
+      <%= form.collection_radio_buttons :scan_report_id, ScanReport.order(created_at: :desc), :id, :created_at, {}, {class: "radio radio-primary mx-3" }%>
     </div>
 
     <%= form.label :comparison_file, "Upload a file to compare the scan to", class: "label-text" %>

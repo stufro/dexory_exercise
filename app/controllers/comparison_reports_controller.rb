@@ -17,8 +17,7 @@ class ComparisonReportsController < ApplicationController
 
   def create
     @report = ComparisonReport.new(comparison_report_params)
-    comparison_data = CSV.parse(params[:comparison_report][:comparison_file].tempfile, headers: true).map(&:to_h)
-    if @report.generate(comparison_data)
+    if @report.generate(comparison_input_data)
       redirect_to comparison_report_path(@report)
     else
       render :new
@@ -29,5 +28,9 @@ class ComparisonReportsController < ApplicationController
 
   def comparison_report_params
     params.require(:comparison_report).permit(:scan_report_id)
+  end
+
+  def comparison_input_data
+    comparison_data = CSV.parse(params[:comparison_report][:comparison_file].tempfile, headers: true).map(&:to_h)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ScanReportsController < ApplicationController
+class ScanReportsController < ActionController::API
   def create
     report = ScanReport.create
     results = report.results.create!(JSON.parse(request.body.read))
