@@ -36,5 +36,7 @@ rspec
 ## Data presentation / UI
 - Improve UX for displaying comparison report such as displaying per rack or with a more visual representation
 - Use jbuilder for JSON responses in `ScanReportsController`
+
+## Refactoring
 - Move comparison generation to separate class to avoid bloated `ComparisonReport` model
 
